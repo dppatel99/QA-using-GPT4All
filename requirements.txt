@@ -3,3 +3,4 @@ gpt4all
 unidecode
 numpy
 pandas
+qdrant-client
