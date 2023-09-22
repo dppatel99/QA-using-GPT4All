@@ -4,3 +4,5 @@ unidecode
 numpy
 pandas
 qdrant-client
+sentence-transformers
+faiss-cpu

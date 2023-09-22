@@ -32,6 +32,17 @@ def ask_question(story_path: str):
     cursor.query("DROP UDF IF EXISTS SentenceFeatureExtractor;").execute()
     cursor.query(Text_feat_function_query).execute()
 
+    cursor.query("DROP UDF IF EXISTS Similarity;").execute()
+    Similarity_function_query = """CREATE UDF Similarity
+                    INPUT (Frame_Array_Open NDARRAY UINT8(3, ANYDIM, ANYDIM),
+                           Frame_Array_Base NDARRAY UINT8(3, ANYDIM, ANYDIM),
+                           Feature_Extractor_Name TEXT(100))
+                    OUTPUT (distance FLOAT(32, 7))
+                    TYPE NdarrayFunction
+                    IMPL './similarity.py'"""
+    
+    cursor.query(Similarity_function_query).execute()
+
     cursor.query(f"DROP TABLE IF EXISTS {story_table};").execute()
     cursor.query(f"DROP TABLE IF EXISTS {story_feat_table};").execute()
 
