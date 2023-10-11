@@ -69,7 +69,7 @@ def download_repo_content():
 
 def read_repo_text_line(path, num_token=1000):
     # For simplicity, we only keep letters.
-    whitelist = set("`~@%^&().!?_\{\}[]-\"|\:\'<>=#0123456789/$+*abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    whitelist = set("`~@%^&.!?_-|:<>=#0123456789/$+*abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
     with open(path, "r") as f:
         line_itr = 0
