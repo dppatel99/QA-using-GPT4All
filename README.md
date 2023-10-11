@@ -22,5 +22,5 @@ python evadb_qa.py
 
 ## How to Run Repository based Question and Answering
 ```bash
-python evadb_ai_repo_qa.py
+python evadb_ai_repo_qa.py {model_name} {Question}
 ```

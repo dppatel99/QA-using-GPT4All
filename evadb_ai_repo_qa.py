@@ -4,13 +4,13 @@ from time import perf_counter
 from gpt4all import GPT4All
 from unidecode import unidecode
 from util import download_repo_content, read_repo_text_line
-
+import sys
 import evadb
 
-def ask_question(notes_path: str):
+def ask_question(notes_path: str, model, question):
     # Initialize early to exclude download time.
 
-    llm = GPT4All("ggml-model-gpt4all-falcon-q4_0.bin")
+    llm = GPT4All(model)
     path = os.path.dirname(os.getcwd())
     cursor = evadb.connect().cursor()
 
@@ -92,7 +92,6 @@ def ask_question(notes_path: str):
     print("Query")
 
     # Search similar text as the asked question.
-    question = "Can you provide me good links for podcast?"
     ascii_question = unidecode(question)
 
     # Instead of passing all the information to the LLM, we extract the 5 topmost similar sentences
@@ -141,7 +140,9 @@ def ask_question(notes_path: str):
 def main():
     repo_content_path = download_repo_content()
 
-    ask_question(repo_content_path)
+    if len(sys.argv)!=3:
+        print("pass sufficient args")
+    ask_question(repo_content_path, sys.argv[1], sys.argv[2])
 
 
 if __name__ == "__main__":
